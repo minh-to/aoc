@@ -26,8 +26,7 @@ public class Day2PartTwo {
         for (int noun = 0; noun < 100; noun++) {
             for (int verb = 0; verb < 100; verb++) {
                 // intCode contains all the current entries
-                List<Integer> tempList = new ArrayList<>();
-                tempList.addAll(intCode);
+                List<Integer> tempList = new ArrayList<>(intCode);
                 tempList.set(1, noun);
                 tempList.set(2, verb);
                 // call method
