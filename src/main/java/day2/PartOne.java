@@ -17,7 +17,7 @@ public class PartOne {
 
 
 
-        try (Stream<String> stream = Files.lines(Paths.get("C://Users/tminhto/Desktop/intcode.txt"))) {
+        try (Stream<String> stream = Files.lines(Paths.get("C:\\Users\\tminhto\\Desktop\\aoc\\src\\main\\java\\day2\\intcode.txt"))) {
             stream.forEach(line -> {
                 String[] strings = line.split(",");
                 for (String s : strings) {
