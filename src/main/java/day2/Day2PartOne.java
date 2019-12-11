@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class PartOne {
+public class Day2PartOne {
 
 
     private static List<Integer> intCode = new ArrayList<>();

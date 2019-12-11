@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class PartTwo {
+public class Day1PartOne {
     private static int requiredFuel;
     private static List<Integer> masses = new ArrayList<>();
 
@@ -16,26 +16,13 @@ public class PartTwo {
         try (Stream<String> stream = Files.lines(Paths.get("C:\\Users\\tminhto\\Desktop\\aoc\\src\\main\\java\\day1\\modules.txt"))) {
             stream.forEach(line->masses.add(Integer.valueOf(line)));
         }
-        masses.forEach(PartTwo::calculateFuel);
+        masses.forEach(Day1PartOne::calculateFuel);
 
         System.out.println(requiredFuel);
     }
 
 
-    private static int calculateFuel(int mass) {
-        int fuelPerModule = calc(mass);
-        int temp = calc(fuelPerModule);
-        while (temp > 0) {
-            fuelPerModule += temp;
-            temp = calc(temp);
-            System.out.println(fuelPerModule);
-        }
-        requiredFuel += fuelPerModule;
-        return requiredFuel;
+    private static void calculateFuel(int mass){
+        requiredFuel += Math.floor(mass / 3)-2;
     }
-
-    private static int calc(int fuel) {
-        return (int) Math.floor(fuel / 3) - 2;
-    }
-
 }
