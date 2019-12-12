@@ -21,7 +21,7 @@ public class Day3PartOne {
 
     public static void main(String[] args) throws IOException {
 
-        try (Stream<String> stream = Files.lines(Paths.get("E:\\aoc\\src\\main\\java\\day3\\input.txt"))) {
+        try (Stream<String> stream = Files.lines(Paths.get("src/main/java/day3/input.txt"))) {
             stream.forEach(line -> {
                 wires.add(line);
             });
