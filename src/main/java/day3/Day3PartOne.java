@@ -5,14 +5,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
 public class Day3PartOne {
 
-//    private static int[][] grid = new int[9000][9000];
-    private static byte[][] grid = new byte[20000][10000];
-
+    private static byte[][] grid = new byte[25][25];
+    private static byte[][] testGrid = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
     private static String[] firstWire;
     private static String[] secondWire;
     private static List<String> wires = new ArrayList<>();
@@ -22,14 +22,13 @@ public class Day3PartOne {
 
     public static void main(String[] args) throws IOException {
 
-        try (Stream<String> stream = Files.lines(Paths.get("src/main/java/day3/input.txt"))) {
+        try (Stream<String> stream = Files.lines(Paths.get("src/main/java/day3/tester.txt"))) {
             stream.forEach(line -> {
                 wires.add(line);
             });
         }
         firstWire = wires.get(0).split(",");
         secondWire = wires.get(1).split(",");
-        System.out.println(firstWire.length + " : " + secondWire.length);
 
         // Starting point is the grid center
         // Crossing(s)
@@ -39,31 +38,37 @@ public class Day3PartOne {
         // calculate distance
 
         // draw first wire part
-//        drawLine(firstWire[0], marker, true, true);
-//        // draw the rest of the fucking owl
-//        for (int i = 1; i < firstWire.length; i++) {
-//            drawLine(firstWire[i], marker, false, true);
-//        }
-//        System.out.println("Marker position: " + marker);
-//
-//        drawLine(secondWire[0], marker, true, false);
-//        for (int i = 1; i < secondWire.length; i++) {
-//            drawLine(secondWire[i], marker, false, false);
-//        }
-//        System.out.println("Marker position: " + marker);
-    int x = 0;
-    int y = 0;
-        for (int i = 0; i < firstWire.length; i++) {
-            if(firstWire[i].substring(0,1).equals("R")){
-                x += Integer.parseInt(firstWire[i].substring(1));
-            }
-
-            if(firstWire[i].substring(0,1).equals("U")){
-                y += Integer.parseInt(firstWire[i].substring(1));
-            }
+        drawLine(firstWire[0], marker, true, true);
+        // draw the rest of the fucking owl
+        for (int i = 1; i < firstWire.length; i++) {
+            drawLine(firstWire[i], marker, false, true);
         }
-        System.out.println(x);
-        System.out.println(y);
+        System.out.println("First wire end position: " + marker);
+
+//        drawLine(secondWire[0], marker, true, false);
+////        for (int i = 1; i < secondWire.length; i++) {
+////            drawLine(secondWire[i], marker, false, false);
+////        }
+////        System.out.println("Second wire end position: " + marker);
+////
+        findIntersections();
+
+        drawGrid();
+
+// sdfsdfdsfsfsd
+//        int x = 0;
+//        int y = 0;
+//        for (int i = 0; i < firstWire.length; i++) {
+//            if (firstWire[i].substring(0, 1).equals("R")) {
+//                x += Integer.parseInt(firstWire[i].substring(1));
+//            }
+//
+//            if (firstWire[i].substring(0, 1).equals("U")) {
+//                y += Integer.parseInt(firstWire[i].substring(1));
+//            }
+//        }
+//        System.out.println(x);
+//        System.out.println(y);
     }
 
     private static void drawLine(String directionString, Point position, boolean isStart, boolean isFirstWire) {
@@ -79,16 +84,26 @@ public class Day3PartOne {
 
         if (isStart) {
             position.setLocation(grid.length / 2, grid[0].length / 2);
-//            position.setLocation(grid.length / 4, grid[0].length / 3.0);
+//            position.setLocation(0,0);
         }
-        System.out.println(position);
+        System.out.println("pos before:" + position);
         System.out.println("direction: " + directionString);
-        System.out.println(partialWireLength);
 
         if (directionString.substring(0, 1).equals("R")) {
             //go right
-            for (double i = 0; i < partialWireLength; i += 0.1) {
-                grid[(int) position.getX()][(int) (position.getY() + i)] = wireId;
+            for (int i = 0; i < partialWireLength; i++) {
+//                if (grid[(int) position.getX()][(int) (position.getY() + i)] == 1) {
+//                    grid[(int) position.getX()][(int) (position.getY() + i)] = 3;
+//
+//                } else {
+//                    grid[(int) position.getX()][(int) (position.getY() + i)] = wireId;
+//                }
+                if (grid[(int) position.getY()][(int) (position.getX() + i)] == 1) {
+                    grid[(int) position.getY()][(int) (position.getX() + i)] = 3;
+
+                } else {
+                    grid[(int) position.getY()][(int) (position.getX() + i)] = wireId;
+                }
             }
             //save current position...as Point?
             marker.setLocation(position.getX() + partialWireLength, position.getY());
@@ -96,30 +111,67 @@ public class Day3PartOne {
 
         if (directionString.substring(0, 1).equals("L")) {
             //go west
-            for (double i = 0; i < partialWireLength; i += 0.1) {
-                grid[(int) position.getX()][(int) (position.getY() - i)] = wireId;
+            for (int i = 0; i < partialWireLength; i++) {
+//                if (grid[(int) position.getX()][(int) (position.getY() - i)] == 1) {
+//                    grid[(int) position.getX()][(int) (position.getY() - i)] = 3;
+//                } else {
+//                    grid[(int) position.getX()][(int) (position.getY() - i)] = wireId;
+//                }
+                if (grid[(int) position.getY() ][(int) (position.getX())- i] == 1) {
+                    grid[(int) position.getY() ][(int) (position.getX())- i] = 3;
+                } else {
+                    grid[(int) position.getY() ][(int) (position.getX())- i] = wireId;
+                }
             }
             marker.setLocation((int) position.getX() - partialWireLength, position.getY());
         }
 
         if (directionString.substring(0, 1).equals("U")) {
             //go up
-            for (double i = 0; i < partialWireLength; i += 0.1) {
-                grid[(int) (position.getX() - i)][(int) position.getY()] = wireId;
+            for (int i = 1; i < partialWireLength+1; i++) {
+//                if (grid[(int) (position.getX() - i)][(int) position.getY()] == 1) {
+//                    grid[(int) (position.getX() - i)][(int) position.getY()] = 3;
+//                } else {
+//                    grid[(int) (position.getX() - i)][(int) position.getY()] = wireId;
+//                }
+                if (grid[(int) (position.getY())- i][(int) position.getX() ] == 1) {
+                    grid[(int) (position.getY())- i][(int) position.getX() ] = 3;
+                } else {
+                    grid[(int) (position.getY()) - i][(int) position.getX()] = wireId;
+                }
             }
             marker.setLocation((int) position.getX(), position.getY() + partialWireLength);
         }
 
         if (directionString.substring(0, 1).equals("D")) {
             //go down
-            for (double i = 0; i < partialWireLength; i += 0.1) {
-                grid[(int) (position.getX() + i)][(int) position.getY()] = wireId;
+            for (int i = 0; i < partialWireLength; i++) {
+//                if (grid[(int) (position.getX() + i)][(int) position.getY()] == 1) {
+//                    grid[(int) (position.getX() + i)][(int) position.getY()] = 3;
+//                } else {
+//                    grid[(int) (position.getX() + i)][(int) position.getY()] = wireId;
+//                }
+                if (grid[(int) (position.getY() + i)][(int) position.getX()] == 1) {
+                    grid[(int) (position.getY() + i)][(int) position.getX()] = 3;
+                } else {
+                    grid[(int) (position.getY() + i)][(int) position.getX()] = wireId;
+                }
             }
             marker.setLocation((int) position.getX(), position.getY() - partialWireLength);
         }
-
-
     }
 
+    private static void findIntersections() {
+        for (int i = 0; i < grid[0].length; i++) {
+            for (int j = 0; j < grid.length; j++) {
+                if (grid[i][j] == 3) {
+                    System.out.println("Overlap at: " + i + " " + j);
+                }
+            }
+        }
+    }
 
+    private static void drawGrid() {
+        System.out.println(Arrays.deepToString(grid).replace("], ", "]\n"));
+    }
 }
