@@ -117,10 +117,10 @@ public class Day3PartOne {
 //                } else {
 //                    grid[(int) position.getX()][(int) (position.getY() - i)] = wireId;
 //                }
-                if (grid[(int) position.getY() ][(int) (position.getX())- i] == 1) {
-                    grid[(int) position.getY() ][(int) (position.getX())- i] = 3;
+                if (grid[(int) position.getY()][(int) (position.getX()) - i] == 1) {
+                    grid[(int) position.getY()][(int) (position.getX()) - i] = 3;
                 } else {
-                    grid[(int) position.getY() ][(int) (position.getX())- i] = wireId;
+                    grid[(int) position.getY()][(int) (position.getX()) - i] = wireId;
                 }
             }
             marker.setLocation((int) position.getX() - partialWireLength, position.getY());
@@ -128,14 +128,14 @@ public class Day3PartOne {
 
         if (directionString.substring(0, 1).equals("U")) {
             //go up
-            for (int i = 1; i < partialWireLength+1; i++) {
+            for (int i = 0; i < partialWireLength + 1; i++) {
 //                if (grid[(int) (position.getX() - i)][(int) position.getY()] == 1) {
 //                    grid[(int) (position.getX() - i)][(int) position.getY()] = 3;
 //                } else {
 //                    grid[(int) (position.getX() - i)][(int) position.getY()] = wireId;
 //                }
-                if (grid[(int) (position.getY())- i][(int) position.getX() ] == 1) {
-                    grid[(int) (position.getY())- i][(int) position.getX() ] = 3;
+                if (grid[(int) (position.getY()) - i][(int) position.getX()] == 1) {
+                    grid[(int) (position.getY()) - i][(int) position.getX()] = 3;
                 } else {
                     grid[(int) (position.getY()) - i][(int) position.getX()] = wireId;
                 }
