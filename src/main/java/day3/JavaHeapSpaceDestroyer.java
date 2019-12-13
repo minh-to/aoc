@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 public class JavaHeapSpaceDestroyer {
 
     //say goodbye to your heap space
-    private static byte[][] grid = new byte[500][500];
+    private static byte[][] grid = new byte[4000][4000];
     private static List<String> wires = new ArrayList<>();
 
     private static List<Integer> intersections = new ArrayList<>();
@@ -26,7 +26,7 @@ public class JavaHeapSpaceDestroyer {
 
     public static void main(String[] args) throws IOException {
 
-        try (Stream<String> stream = Files.lines(Paths.get("src/main/java/day3/tester.txt"))) {
+        try (Stream<String> stream = Files.lines(Paths.get("src/main/java/day3/input.txt"))) {
             stream.forEach(line -> {
                 wires.add(line);
             });
