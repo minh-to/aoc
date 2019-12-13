@@ -1,7 +1,10 @@
 package day3;
 
 import java.awt.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -13,7 +16,7 @@ import java.util.stream.Stream;
 public class JavaHeapSpaceDestroyer {
 
     //say goodbye to your heap space
-    private static byte[][] grid = new byte[40000][40000];
+    private static byte[][] grid = new byte[500][500];
     private static List<String> wires = new ArrayList<>();
 
     private static List<Integer> intersections = new ArrayList<>();
@@ -23,7 +26,7 @@ public class JavaHeapSpaceDestroyer {
 
     public static void main(String[] args) throws IOException {
 
-        try (Stream<String> stream = Files.lines(Paths.get("src/main/java/day3/input.txt"))) {
+        try (Stream<String> stream = Files.lines(Paths.get("src/main/java/day3/tester.txt"))) {
             stream.forEach(line -> {
                 wires.add(line);
             });
@@ -45,6 +48,7 @@ public class JavaHeapSpaceDestroyer {
 
         findIntersections();
         calcDistance();
+        drawGrid();
     }
 
     private static void drawLine(String directionString, Point position, boolean isStart, boolean isFirstWire) {
@@ -129,7 +133,15 @@ public class JavaHeapSpaceDestroyer {
         System.out.println(Collections.min(intersections));
     }
 
-    private static void drawGrid() {
-        System.out.println(Arrays.deepToString(grid).replace("], ", "]\n"));
+    // 🤔🔎
+    private static void drawGrid() throws IOException {
+//        System.out.println(Arrays.deepToString(grid).replace("], ", "]\n"));
+
+              //Mark the starting point
+        grid[grid.length/2][grid[0].length/2] = 69;
+
+        BufferedWriter bufferedWriter = new BufferedWriter( new FileWriter( "src/main/java/day3/RIP_eyes.txt"));
+        PrintWriter printWriter=new PrintWriter(bufferedWriter);
+        printWriter.println(Arrays.deepToString(grid).replace("], ", "]\n"));
     }
 }
