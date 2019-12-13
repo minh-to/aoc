@@ -13,7 +13,7 @@ public class Day2PartTwo {
 
     public static void main(String[] args) throws IOException {
 
-        try (Stream<String> stream = Files.lines(Paths.get("C:\\Users\\tminhto\\Desktop\\aoc\\src\\main\\java\\day2\\bruteforce.txt"))) {
+        try (Stream<String> stream = Files.lines(Paths.get("src/main/java/day2/bruteforce.txt"))) {
             stream.forEach(line -> {
                 String[] strings = line.split(",");
                 for (String s : strings) {

@@ -13,7 +13,7 @@ public class Day1PartTwo {
 
     public static void main(String[] args) throws IOException {
 
-        try (Stream<String> stream = Files.lines(Paths.get("C:\\Users\\tminhto\\Desktop\\aoc\\src\\main\\java\\day1\\modules.txt"))) {
+        try (Stream<String> stream = Files.lines(Paths.get("src/main/java/day1/modules.txt"))) {
             stream.forEach(line->masses.add(Integer.valueOf(line)));
         }
         masses.forEach(Day1PartTwo::calculateFuel);
