@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 public class JavaHeapSpaceDestroyer {
 
     //say goodbye to your heap space
-    private static byte[][] grid = new byte[4000][4000];
+    private static byte[][] grid = new byte[40000][40000];
     private static List<String> wires = new ArrayList<>();
 
     private static List<Integer> intersections = new ArrayList<>();
@@ -35,7 +35,7 @@ public class JavaHeapSpaceDestroyer {
         String[] secondWire = wires.get(1).split(",");
 
         //1st wire
-        drawLine(firstWire[0], marker, true, false);
+        drawLine(firstWire[0], marker, true, true);
         for (int i = 1; i < firstWire.length; i++) {
             drawLine(firstWire[i], marker, false, true);
         }
@@ -48,7 +48,7 @@ public class JavaHeapSpaceDestroyer {
 
         findIntersections();
         calcDistance();
-        drawGrid();
+//        drawGrid();
     }
 
     private static void drawLine(String directionString, Point position, boolean isStart, boolean isFirstWire) {
@@ -68,10 +68,9 @@ public class JavaHeapSpaceDestroyer {
 
         if (directionString.substring(0, 1).equals("R")) {
             //go right
-            for (int i = 1; i < partialWireLength + 1; i++) {
-                if (grid[(int) position.getX()][(int) (position.getY() + i)] == 1 && wireId != 1) {
+            for (int i = 0; i < partialWireLength+1; i++) {
+                if (grid[(int) position.getX()][(int) (position.getY() + i)] == 1 && wireId == 2) {
                     grid[(int) position.getX()][(int) (position.getY() + i)] = 3;
-
                 } else {
                     grid[(int) position.getX()][(int) (position.getY() + i)] = wireId;
                 }
@@ -82,8 +81,8 @@ public class JavaHeapSpaceDestroyer {
 
         if (directionString.substring(0, 1).equals("L")) {
             //go west
-            for (int i = 1; i < partialWireLength + 1; i++) {
-                if (grid[(int) position.getX()][(int) (position.getY() - i)] == 1 && wireId != 1) {
+            for (int i = 0; i < partialWireLength+1 ; i++) {
+                if (grid[(int) position.getX()][(int) (position.getY() - i)] == 1 && wireId == 2) {
                     grid[(int) position.getX()][(int) (position.getY() - i)] = 3;
                 } else {
                     grid[(int) position.getX()][(int) (position.getY() - i)] = wireId;
@@ -93,8 +92,8 @@ public class JavaHeapSpaceDestroyer {
         }
         if (directionString.substring(0, 1).equals("U")) {
             //go up
-            for (int i = 1; i < partialWireLength + 1; i++) {
-                if (grid[(int) (position.getX() - i)][(int) position.getY()] == 1 && wireId != 1) {
+            for (int i = 0; i < partialWireLength + 1; i++) {
+                if (grid[(int) (position.getX() - i)][(int) position.getY()] == 1 && wireId == 2) {
                     grid[(int) (position.getX() - i)][(int) position.getY()] = 3;
                 } else {
                     grid[(int) (position.getX() - i)][(int) position.getY()] = wireId;
@@ -105,8 +104,8 @@ public class JavaHeapSpaceDestroyer {
 
         if (directionString.substring(0, 1).equals("D")) {
             //go down
-            for (int i = 1; i < partialWireLength + 1; i++) {
-                if (grid[(int) (position.getX() + i)][(int) position.getY()] == 1 && wireId != 1) {
+            for (int i = 0; i < partialWireLength + 1; i++) {
+                if (grid[(int) (position.getX() + i)][(int) position.getY()] == 1 && wireId == 2) {
                     grid[(int) (position.getX() + i)][(int) position.getY()] = 3;
                 } else {
                     grid[(int) (position.getX() + i)][(int) position.getY()] = wireId;
@@ -116,14 +115,13 @@ public class JavaHeapSpaceDestroyer {
         }
     }
 
-
     private static void findIntersections() {
         for (int i = 0; i < grid[0].length; i++) {
             for (int j = 0; j < grid.length; j++) {
                 if (grid[i][j] == 3) {
                     System.out.println("Overlap at: " + i + " " + j);
                     intersections.add((Math.abs(i - grid.length / 2) + (Math.abs(j - grid.length / 2))));
-                }
+                };
             }
         }
     }
