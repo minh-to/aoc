@@ -10,8 +10,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class Day3PartOne {
+public class JavaHeapSpaceDestroyer {
 
+    //say goodbye to your heap space
     private static byte[][] grid = new byte[40000][40000];
     private static List<String> wires = new ArrayList<>();
 
@@ -124,7 +125,7 @@ public class Day3PartOne {
     }
 
     private static void calcDistance() {
-        intersections.forEach(integer -> System.out.println("maybe this is the solution:    " + integer));
+        intersections.forEach(integer -> System.out.println("possible solution:    " + integer));
         System.out.println(Collections.min(intersections));
     }
 
