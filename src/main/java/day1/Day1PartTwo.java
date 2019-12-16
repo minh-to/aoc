@@ -22,7 +22,7 @@ public class Day1PartTwo {
     }
 
 
-    private static int calculateFuel(int mass) {
+    private static void calculateFuel(int mass) {
         int fuelPerModule = calc(mass);
         int temp = calc(fuelPerModule);
         while (temp > 0) {
@@ -31,7 +31,6 @@ public class Day1PartTwo {
             System.out.println(fuelPerModule);
         }
         requiredFuel += fuelPerModule;
-        return requiredFuel;
     }
 
     private static int calc(int fuel) {
